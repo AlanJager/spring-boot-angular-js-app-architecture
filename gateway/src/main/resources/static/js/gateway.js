@@ -22,17 +22,20 @@ angular.module('gateway', [ 'ngRoute' ]).config(function ($httpProvider) {
             $http.get('user', {
                 headers : headers
             }).then(function(response) {
-                if (response.data.name) {
+                var data = response.data;
+                if (data.name) {
                     self.authenticated = true;
+                    self.user = data.name
+                    self.admin = data && data.roles && data.roles.indexOf("ROLE_ADMIN")>-1;
                 } else {
                     self.authenticated = false;
+                    self.admin = false;
                 }
-                callback && callback();
+                callback && callback(true);
             }, function() {
                 self.authenticated = false;
-                callback && callback();
+                callback && callback(false);
             });
-
         }
 
         authenticate();
@@ -56,7 +59,7 @@ angular.module('gateway', [ 'ngRoute' ]).config(function ($httpProvider) {
         self.logout = function() {
             $http.post('logout', {}).finally(function() {
                 self.authenticated = false;
-                $location.path("/");
+                self.admin = false;
             });
         }
 
