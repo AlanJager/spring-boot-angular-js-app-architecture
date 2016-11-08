@@ -1,4 +1,4 @@
-Shimeji for Mac
+Spring-boot and Angular-js application architecture
 ===============
 
 This is a repository for Spring boot and angular js application architecture, An maven based application, and work with a 
