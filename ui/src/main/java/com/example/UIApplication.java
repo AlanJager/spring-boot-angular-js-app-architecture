@@ -1,6 +1,7 @@
-package com;
+package com.example;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @RestController
+@EnableAutoConfiguration
 public class UIApplication {
 
     public static void main(String[] args) {
@@ -54,7 +56,7 @@ public class UIApplication {
     public Map<String,String> token(HttpSession session) {
         return Collections.singletonMap("token", session.getId());
     }
-    
+
     @RequestMapping(value = "/{[path:[^\\.]*}")
     public String redirect() {
         return "forward:/";
