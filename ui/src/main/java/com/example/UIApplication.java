@@ -19,10 +19,10 @@ import java.util.Map;
 
 @SpringBootApplication
 @RestController
-public class DemoApplication {
+public class UIApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(UIApplication.class, args);
     }
 
     @Configuration
