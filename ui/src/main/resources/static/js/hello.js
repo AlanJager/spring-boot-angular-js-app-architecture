@@ -1,15 +1,15 @@
-angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProvider) {
+angular.module('hello', [ 'ngRoute' , 'home', 'navigation'])
+    .config(function($locationProvider, $routeProvider, $httpProvider) {
+        $routeProvider.when('/', {
+            templateUrl : 'js/home/home.html',
+            controller : 'home'
+        }).when('/login', {
+            templateUrl : 'js/navigation/login.html',
+            controller : 'navigation'
+        }).otherwise('/');
 
-    $routeProvider.when('/', {
-        templateUrl : 'home.html',
-        controller : 'home',
-        controllerAs : 'controller'
-    }).when('/login', {
-        templateUrl : 'login.html',
-        controller : 'navigation',
-        controllerAs : 'controller'
-    }).otherwise('/');
 
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        $locationProvider.html5Mode(true);
 
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 });

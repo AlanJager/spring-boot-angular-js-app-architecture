@@ -2,7 +2,7 @@
  * Created by zouye on 2016/11/13.
  */
 
-angular.module('navigatoin', []).controller(function($rootScope, $http, $location, $route) {
+angular.module('navigation', []).controller('navigation', function($rootScope, $http, $location, $route) {
     var self = this;
 
     self.tab = function(route) {
