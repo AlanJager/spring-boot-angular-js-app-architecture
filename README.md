@@ -12,7 +12,8 @@ Type `mvn package` in each project root.
 
 TODO
 ----
-* moduler all the parts
+* change ui to use resource token
+* modular admin
 * change spring boot to a higher version
 
 
