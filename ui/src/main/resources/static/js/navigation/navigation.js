@@ -2,60 +2,36 @@
  * Created by zouye on 2016/11/13.
  */
 
-angular.module('navigation', []).controller('navigation', function($rootScope, $http, $location, $route) {
-    var self = this;
+angular.module('navigation', ['ngRoute', 'auth']).controller(
+    'navigation',
 
-    self.tab = function(route) {
-        return $route.current && route === $route.current.controller;
-    };
+    function($route, auth) {
 
-    var authenticate = function(credentials, callback) {
+        var self = this;
 
-        var headers = credentials ? {
-            authorization : "Basic "
-            + btoa(credentials.username + ":"
-                + credentials.password)
-        } : {};
+        self.credentials = {};
 
-        $http.get('user', {
-            headers : headers
-        }).then(function(response) {
-            if (response.data.name) {
-                $rootScope.authenticated = true;
-            } else {
-                $rootScope.authenticated = false;
-            }
-            callback && callback();
-        }, function() {
-            $rootScope.authenticated = false;
-            callback && callback();
-        });
+        self.tab = function(route) {
+            return $route.current && route === $route.current.controller;
+        };
 
-    }
+        self.authenticated = function() {
+            return auth.authenticated;
+        }
 
-    authenticate();
+        self.login = function() {
+            console.log("login invoked");
+            auth.authenticate(self.credentials, function(authenticated) {
+                if (authenticated) {
+                    console.log("Login succeeded")
+                    self.error = false;
+                } else {
+                    console.log("Login failed")
+                    self.error = true;
+                }
+            })
+        };
 
-    self.credentials = {};
-    self.login = function() {
-        authenticate(self.credentials, function() {
-            if ($rootScope.authenticated) {
-                console.log("Login succeeded")
-                $location.path("/");
-                self.error = false;
-                $rootScope.authenticated = true;
-            } else {
-                console.log("Login failed")
-                $location.path("/login");
-                self.error = true;
-                $rootScope.authenticated = false;
-            }
-        })
-    };
+        self.logout = auth.clear;
 
-    self.logout = function() {
-        $http.post('logout', {}).finally(function() {
-            $rootScope.authenticated = false;
-            $location.path("/");
-        });
-    }
-});
+    });

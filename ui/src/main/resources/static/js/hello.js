@@ -1,4 +1,4 @@
-angular.module('hello', [ 'ngRoute' , 'home', 'navigation'])
+angular.module('hello', [ 'ngRoute', 'auth', 'home', 'navigation'])
     .config(function($locationProvider, $routeProvider, $httpProvider) {
         $routeProvider.when('/', {
             templateUrl : 'js/home/home.html',
@@ -12,4 +12,6 @@ angular.module('hello', [ 'ngRoute' , 'home', 'navigation'])
         $locationProvider.html5Mode(true);
 
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-});
+}).run(function (auth) {
+    auth.init('/', '/login', '/logout');
+})

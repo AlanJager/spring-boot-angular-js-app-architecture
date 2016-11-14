@@ -17,7 +17,9 @@
 // });
 angular.module('home', []).controller('home', function($http) {
     var self = this;
-    $http.get('/user/').then(function(response) {
+    $http.get('/user').then(function(response) {
+
         self.user = response.data.name;
+        console.log('get user invoked and name is: ' + response.data.name);
     });
 });
