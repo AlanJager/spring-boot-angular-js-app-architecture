@@ -12,7 +12,7 @@ Type `mvn package` in each project root.
 
 TODO
 ----
-* add an Admin application
+* moduler all the parts
 * change spring boot to a higher version
 
 
