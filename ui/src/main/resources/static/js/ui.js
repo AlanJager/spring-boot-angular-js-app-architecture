@@ -1,4 +1,4 @@
-angular.module('hello', [ 'ngRoute', 'auth', 'home', 'navigation'])
+angular.module('ui', [ 'ngRoute', 'auth', 'home', 'navigation'])
     .config(function($locationProvider, $routeProvider, $httpProvider) {
         $routeProvider.when('/', {
             templateUrl : 'js/home/home.html',
