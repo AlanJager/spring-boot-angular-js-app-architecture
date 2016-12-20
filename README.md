@@ -12,10 +12,8 @@ Type `mvn package` in each project root.
 
 TODO
 ----
-* change ui to use resource token
-* modular admin
-* change spring boot to a higher version
-
+* change angular js to higher version
+* use redis to make requests queue
 
 FIXED
 ----
